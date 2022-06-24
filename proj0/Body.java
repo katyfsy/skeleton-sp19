@@ -1,4 +1,6 @@
 public class Body {
+  final static double G = 6.67e-11;
+
   public double xxPos;
   public double yyPos;
   public double xxVel;
@@ -28,5 +30,9 @@ public class Body {
     double xxDis = Math.abs(this.xxPos - b2.xxPos);
     double yyDis = Math.abs(this.yyPos - b2.yyPos);
     return Math.pow(Math.pow(xxDis, 2) + Math.pow(yyDis, 2), 0.5);
+  }
+
+  public double calcForceExertedBy(Body b2) {
+    return G * this.mass * b2.mass / Math.pow(this.calcDistance(b2), 2);
   }
 }
