@@ -65,4 +65,13 @@ public class Body {
     }
     return netY;
   }
+
+  public void update(double dt, double xForce, double yForce) {
+    double accX = xForce/this.mass;
+    double accY = yForce/this.mass;
+    this.xxVel = this.xxVel + dt * accX;
+    this.yyVel = this.yyVel + dt * accY;
+    this.xxPos = this.xxPos + (dt*this.xxVel);
+    this.yyPos = this.yyPos + (dt*this.yyVel);
+  }
 }
