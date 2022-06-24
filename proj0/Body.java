@@ -56,13 +56,13 @@ public class Body {
   }
 
   public double calcNetForceExertedByY(Body[] bodies) {
-  double netY = 0;
-  for (Body b: bodies) {
-    if (this == b || b == null) {
-      continue;
+    double netY = 0;
+    for (Body b: bodies) {
+      if (this == b || b == null) {
+        continue;
+      }
+      netY += this.calcForceExertedByY(b);
     }
-    netY += this.calcForceExertedByY(b);
+    return netY;
   }
-  return netY;
-}
 }
