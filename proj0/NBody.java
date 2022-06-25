@@ -30,12 +30,45 @@ public class NBody {
     String filename = args[2];
     Body[] bodies = readBodies(filename);
     double radius = readRadius(filename);
+    int count = bodies.length;
 
     StdDraw.setScale(-radius, radius);
     StdDraw.picture(0, 0, "images/starfield.jpg");
 
     for (Body b: bodies) {
       b.draw();
+    }
+
+    StdDraw.enableDoubleBuffering();
+
+    double t = 0;
+
+    while (t < T) {
+      double[] xForces = new double[count];
+      double[] yForces = new double[count];
+
+      int i = 0;
+      while (i < count) {
+        xForces[i] = bodies[i].calcNetForceExertedByX(bodies);
+        yForces[i] = bodies[i].calcNetForceExertedByY(bodies);
+        i += 1;
+      }
+
+      int j = 0;
+      while (j < count) {
+        bodies[j].update(dt, xForces[j], yForces[j]);
+        j += 1;
+      }
+
+      StdDraw.picture(0, 0, "images/starfield.jpg");
+      for (Body b: bodies) {
+       b.draw();
+      }
+
+      StdDraw.show();
+      StdDraw.pause(10);
+
+      t += dt;
     }
   }
 }
