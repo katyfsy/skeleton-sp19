@@ -24,4 +24,17 @@ public class NBody {
     return bodies;
   }
 
+  public static void main(String[] args) {
+    double T = args[0].parseDouble();
+    double dt = args[1].parseDouble();
+    String filename = args[2];
+    Body[] bodies = readBodies(filename);
+    double radius = readRadius(filename);
+
+    StdDraw.enableDoubleBuffering();
+    StdDraw.setScale(-radius, radius);
+    StdDraw.clear();
+    StdDraw.picture(1, -1, "images/starfield.jpg");
+  }
+
 }
